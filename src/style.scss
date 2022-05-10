@@ -6,19 +6,34 @@ $green-correct: hsla(133, 46%, 71%, 1);
 $blue-selected: hsla(230, 61%, 90%, 1);
 $red-wrong: hsla(360, 81%, 85%, 1);
 
-$d1: 8px;
-$d2: 12px;
-$d3: 16px;
-$d4: 24px;
-$d5: 32px;
-$d6: 40px;
-$d7: 56px;
-$d8: 64px;
+$d1: 4px;
+$d2: 8px;
+$d3: 12px;
+$d4: 16px;
+$d5: 24px;
+$d6: 32px;
+$d7: 40px;
+$d8: 56px;
+$d9: 64px;
+$d10: 80px;
+$d11: 96px;
+
+$heading-text: "Karla", "Inter", sans-serif;
+$body-text: "Inter", "Helvetica", sans-serif;
 
 body {
-	font-family: "Karla", "Inter", sans-serif;
+	font-family: $body-text;
 	background-color: $blue-bg;
 	color: $blue-primary;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $heading-text;
 }
 
 #root {
@@ -32,7 +47,7 @@ body {
 }
 
 #container {
-	margin: $d6 $d8;
+	margin: $d8 $d10;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -48,14 +63,44 @@ body {
 	button {
 		background-color: $blue-secondary;
 		color: $blue-bg;
-		padding: $d2 $d6;
+		padding: $d3 $d7;
 		border: none;
-		border-radius: $d1;
+		border-radius: $d2;
 	}
 }
 
-.option {
-	padding: $d2 $d4;
-	border: $blue-secondary;
-	border-radius: $d2;
+.quiz {
+	width: 100%;
+
+	h3 {
+		font-weight: 700;
+		letter-spacing: -0.5px;
+		margin-bottom: $d4;
+	}
+
+	.options {
+		display: flex;
+		gap: $d3;
+
+		div {
+			padding: $d1 $d5;
+			border: 1px solid $blue-secondary;
+			border-radius: $d9;
+			text-align: center;
+		}
+	}
+
+	hr {
+		margin: 2rem 0;
+	}
+
+	hr:not([size]) {
+		height: 3px;
+		background-color: $blue-divider;
+	}
+}
+
+pre {
+	white-space: pre-wrap;
+	font-size: 1rem;
 }
