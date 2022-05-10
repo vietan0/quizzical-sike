@@ -1,19 +1,24 @@
 import React from "react";
+import Quiz from "./components/Quiz";
 
 export default function App() {
-	let numDivs = new Array(50).fill(0).map((_, i) => <div>Item {i + 1}</div>);
+	let [quizzing, setQuizzing] = React.useState(false);
 	return (
-		<>
-			<h1>App Banana goes here</h1>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores temporibus dolores
-				atque sint quaerat dolore natus tempore et, voluptatibus, nobis fugit. Earum nulla
-				alias quam et tempora? Inventore ut deleniti quod. Delectus quam praesentium
-				laboriosam, perspiciatis rerum, hic nam consequuntur voluptatem similique vel eum
-				dolor sunt neque et magni maiores?
-			</p>
-			<button>Send bananas</button>
-			<div className="flex-container">{numDivs}</div>
-		</>
+		<div id="container">
+			{quizzing ? (
+				<>
+					<h1>Quizzical</h1>
+					<p>
+						Built using{" "}
+						<a href="https://opentdb.com/api_config.php" target="_blank">
+							Open Trivia Database
+						</a>
+					</p>
+					<button>Start Quiz</button>
+				</>
+			) : (
+				<h1>Quizzing</h1>
+			)}
+		</div>
 	);
 }
