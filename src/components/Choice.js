@@ -6,7 +6,7 @@ export default function Choice(props) {
 			onClick={() => props.toggleSelect(props.id)}
 			className={`${props.selected ? "selected" : ""}`}
 		>
-			{props.text} {props.correct && `- the correct one`}
+			{props.unEscape(props.text)} {props.correct && `- the correct one`}
 		</div>
 	);
 }

@@ -65,8 +65,8 @@ export default function App() {
 					<button className="get-quizzes" onClick={getNewQuizzes}>
 						Get new quizzes
 					</button>
-					{/* <pre>{JSON.stringify(quizzes, null, 4)}</pre> */}
 					<>{quizElements}</>
+					<pre>{JSON.stringify(quizzes, null, 4)}</pre>
 					<button className="check-answer">Check answer</button>
 				</>
 			)}

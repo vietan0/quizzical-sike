@@ -26,6 +26,27 @@ export default function Quiz(props) {
 		);
 	}
 
+	function unEscape(str) {
+		const CONVERT_TABLE = {
+			"&#039;": "'",
+			"&quot;": '"',
+			"&amp;": "&",
+			"&lt;": "<",
+			"&gt;": ">",
+			"&ldquo;": "“",
+			"&rdquo;": "”",
+			"&lsquo;": "‘",
+			"&rdquo;": "’",
+			"&hellip;": "…",
+		};
+		let matches = str.match(/&[\S]{2,6}?;/g);
+		if (!matches) return str;
+		for (let i = 0; i < matches.length; i++) {
+			str = str.replace(matches[i], CONVERT_TABLE[matches[i]]);
+		}
+		return str;
+	}
+
 	// shuffle the objects before render into <Choice />s
 	React.useEffect(() => {
 		setChoices(oldChoices => {
@@ -50,12 +71,13 @@ export default function Quiz(props) {
 			key={c.id}
 			id={c.id}
 			toggleSelect={toggleSelect}
+			unEscape={unEscape}
 		/>
 	));
 
 	return (
 		<article className="quiz">
-			<h2>{props.question}</h2>
+			<h2>{unEscape(props.question)}</h2>
 			<div className="options">{choiceDivs}</div>
 			{/* <pre>{JSON.stringify(choices, null, 4)}</pre> */}
 			<hr />
