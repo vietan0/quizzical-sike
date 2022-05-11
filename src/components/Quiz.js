@@ -3,44 +3,61 @@ import Choice from "./Choice";
 import {nanoid} from "nanoid";
 
 export default function Quiz(props) {
-	let [choiceTexts, setChoiceTexts] = React.useState(() => [
-		props.correct_answer,
-		...props.incorrect_answers,
-	]);
-	let correct = [true, false, false, false];
-
 	// combine two 1D arrays into a 2D array
 	let [choices, setChoices] = React.useState(() =>
-		choiceTexts.map((text, i) => ({
-			text: text,
-			correct: correct[i],
+		[props.correct_answer, ...props.incorrect_answers].map((value, i) => ({
+			text: value,
+			correct: [true, false, false, false][i],
 			selected: false,
+			id: nanoid(),
 		}))
 	);
 
-	let [choiceDivs, setChoiceDivs] = React.useState(() => {
-		let divs = choices.map(c => (
-			<Choice text={c.text} correct={c.correct} selected={c.selected} key={nanoid()} />
-		));
-		for (let i = 1; i <= 3; i++) {
-			// shuffle the divs
-			let randomIndex = Math.floor(Math.random() * 3);
-			divs = [
-				divs[randomIndex],
-				...divs.slice(0, randomIndex),
-				...divs.slice(randomIndex + 1),
-			];
-		}
-		return divs;
-	});
+	function toggleSelect(selectedId) {
+		setChoices(oldChoices =>
+			oldChoices.map(obj =>
+				selectedId === obj.id
+					? {
+							...obj,
+							selected: !obj.selected,
+					  }
+					: {...obj, selected: false}
+			)
+		);
+	}
+
+	// shuffle the objects before render into <Choice />s
+	React.useEffect(() => {
+		setChoices(oldChoices => {
+			for (let i = 1; i <= 3; i++) {
+				let divs = [];
+				let randomIndex = Math.floor(Math.random() * 3);
+				divs = [
+					oldChoices[randomIndex],
+					...oldChoices.slice(0, randomIndex),
+					...oldChoices.slice(randomIndex + 1),
+				];
+				return divs;
+			}
+		});
+	}, []);
+
+	let choiceDivs = choices.map(c => (
+		<Choice
+			text={c.text}
+			correct={c.correct}
+			selected={c.selected}
+			key={c.id}
+			id={c.id}
+			toggleSelect={toggleSelect}
+		/>
+	));
 
 	return (
 		<article className="quiz">
-			<pre>{JSON.stringify(props, null, 4)}</pre>
-			{/* <pre>{JSON.stringify(choices, null, 4)}</pre> */}
-
 			<h2>{props.question}</h2>
 			<div className="options">{choiceDivs}</div>
+			{/* <pre>{JSON.stringify(choices, null, 4)}</pre> */}
 			<hr />
 		</article>
 	);

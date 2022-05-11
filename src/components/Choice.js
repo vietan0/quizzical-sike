@@ -2,8 +2,11 @@ import React from "react";
 
 export default function Choice(props) {
 	return (
-		<div>
-			{props.text}
+		<div
+			onClick={() => props.toggleSelect(props.id)}
+			className={`${props.selected ? "selected" : ""}`}
+		>
+			{props.text} {props.correct && `- the correct one`}
 		</div>
 	);
 }

@@ -66,10 +66,21 @@ h6 {
 .quiz .options div {
   font-size: 0.875rem;
   padding: 4px 12px;
-  border: 1px solid hsl(230deg, 34%, 46%);
+  outline: 1px solid hsl(230deg, 34%, 46%);
   border-radius: 64px;
   text-align: center;
   min-width: max-content;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color ease-out 0.1s, outline ease-out 0.1s;
+}
+.quiz .options div:hover {
+  outline: none;
+  background-color: hsl(230deg, 61%, 95%);
+}
+.quiz .options div.selected {
+  outline: none;
+  background-color: hsl(230deg, 61%, 90%);
 }
 .quiz hr {
   margin: 2rem 0;
@@ -82,6 +93,8 @@ h6 {
 pre {
   white-space: pre-wrap;
   font-size: 1rem;
+  width: 100%;
+  margin-top: 16px;
 }
 
 /*# sourceMappingURL=style.css.map */
