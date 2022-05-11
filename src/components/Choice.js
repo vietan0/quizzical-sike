@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Choice({text}) {
+export default function Choice(props) {
 	return (
 		<div>
-			{text}
+			{props.text}
 		</div>
 	);
 }

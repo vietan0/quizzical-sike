@@ -4,7 +4,7 @@ import {nanoid} from "nanoid"
 
 export default function App() {
 	let [isBoarding, setIsBoarding] = React.useState(
-		() => JSON.parse(localStorage.getItem("isBoarding")) || true
+		() => JSON.parse(localStorage.getItem("isBoarding")) || false // reset later
 	);
 	let [quizzes, setQuizzes] = React.useState(
 		() => JSON.parse(localStorage.getItem("quizzes")) || []
