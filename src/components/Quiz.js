@@ -1,6 +1,7 @@
 import React from "react";
 import Choice from "./Choice";
 import {nanoid} from "nanoid";
+import unEscape from "../unEscape"
 
 export default function Quiz(props) {
 	// combine two 1D arrays into a 2D array
@@ -26,26 +27,6 @@ export default function Quiz(props) {
 		);
 	}
 
-	function unEscape(str) {
-		const CONVERT_TABLE = {
-			"&#039;": "'",
-			"&quot;": '"',
-			"&amp;": "&",
-			"&lt;": "<",
-			"&gt;": ">",
-			"&ldquo;": "“",
-			"&rdquo;": "”",
-			"&lsquo;": "‘",
-			"&rdquo;": "’",
-			"&hellip;": "…",
-		};
-		let matches = str.match(/&[\S]{2,6}?;/g);
-		if (!matches) return str;
-		for (let i = 0; i < matches.length; i++) {
-			str = str.replace(matches[i], CONVERT_TABLE[matches[i]]);
-		}
-		return str;
-	}
 
 	// shuffle the objects before render into <Choice />s
 	React.useEffect(() => {
@@ -71,7 +52,6 @@ export default function Quiz(props) {
 			key={c.id}
 			id={c.id}
 			toggleSelect={toggleSelect}
-			unEscape={unEscape}
 		/>
 	));
 

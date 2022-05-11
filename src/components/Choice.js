@@ -1,4 +1,5 @@
 import React from "react";
+import unEscape from "../unEscape";
 
 export default function Choice(props) {
 	return (
@@ -6,7 +7,7 @@ export default function Choice(props) {
 			onClick={() => props.toggleSelect(props.id)}
 			className={`${props.selected ? "selected" : ""}`}
 		>
-			{props.unEscape(props.text)} {props.correct && `- the correct one`}
+			{unEscape(props.text)} {props.correct && `- the correct one`}
 		</div>
 	);
 }
