@@ -1,20 +1,17 @@
 import React from "react";
-import Option from "./Option";
+import Choice from "./Choice";
 
 export default function Quiz(props) {
-	// let [options, setOptions] = React.useState(
-	// 	// new Array(4).fill(0).map(n => <Option />)
-	// 	{}
-	// );
 
 	return (
 		<article className="quiz">
+			<pre>{JSON.stringify(props, null, 4)}</pre>
 			<h2>{props.question}</h2>
 			<div className="options">
-				<Option text={props.correct_answer}/>
-				<Option text={props.incorrect_answers[0]}/>
-				<Option text={props.incorrect_answers[1]}/>
-				<Option text={props.incorrect_answers[2]}/>
+				<Choice text={props.correct_answer}/>
+				<Choice text={props.incorrect_answers[0]}/>
+				<Choice text={props.incorrect_answers[1]}/>
+				<Choice text={props.incorrect_answers[2]}/>
 			</div>
 			<hr />
 		</article>

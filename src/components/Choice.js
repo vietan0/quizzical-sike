@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Option({text}) {
+export default function Choice({text}) {
 	return (
 		<div>
 			{text}
