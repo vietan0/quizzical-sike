@@ -1,19 +1,61 @@
 import React from "react";
+import Quiz from "./components/Quiz";
+import {nanoid} from "nanoid"
 
 export default function App() {
-	let numDivs = new Array(50).fill(0).map((_, i) => <div>Item {i + 1}</div>);
+	let [isBoarding, setIsBoarding] = React.useState(
+		() => JSON.parse(localStorage.getItem("isBoarding")) || false // reset later
+	);
+	let [quizzes, setQuizzes] = React.useState(
+		() => JSON.parse(localStorage.getItem("quizzes")) || []
+	);
+
+	// sync local storage with state
+	React.useEffect(() => {
+		localStorage.setItem("isBoarding", JSON.stringify(isBoarding));
+		localStorage.setItem("quizzes", JSON.stringify(quizzes));
+	}, [isBoarding, quizzes]);
+
+	function getNewQuizzes() {
+		fetch("https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple")
+			.then(res => res.json())
+			.then(data => setQuizzes(data.results));
+	}
+
+	function startQuiz() {
+		setIsBoarding(false);
+		getNewQuizzes();
+	}
+
+	let quizElements = quizzes.map(q => (
+		<Quiz
+			question={q.question}
+			correct_answer={q.correct_answer}
+			incorrect_answers={q.incorrect_answers}
+			key={nanoid()}
+		/>
+	));
 	return (
-		<>
-			<h1>App Banana goes here</h1>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores temporibus dolores
-				atque sint quaerat dolore natus tempore et, voluptatibus, nobis fugit. Earum nulla
-				alias quam et tempora? Inventore ut deleniti quod. Delectus quam praesentium
-				laboriosam, perspiciatis rerum, hic nam consequuntur voluptatem similique vel eum
-				dolor sunt neque et magni maiores?
-			</p>
-			<button>Send bananas</button>
-			<div className="flex-container">{numDivs}</div>
-		</>
+		<div id="container">
+			{isBoarding ? (
+				<>
+					<h1>Quizzical</h1>
+					<p>
+						Built using{" "}
+						<a href="https://opentdb.com/api_config.php" target="_blank">
+							Open Trivia Database
+						</a>
+					</p>
+					<button onClick={startQuiz}>Start Quiz</button>
+				</>
+			) : (
+				<>
+					<button className="get-quizzes" onClick={getNewQuizzes}>
+						Get new quizzes
+					</button>
+					<>{quizElements}</>
+				</>
+			)}
+		</div>
 	);
 }
