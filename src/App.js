@@ -42,16 +42,6 @@ export default function App() {
 				officia velit veniam sed odio quae quasi quia labore expedita, perspiciatis porro
 				quod accusamus ratione error maiores. Deserunt, qui consequatur.
 			</p>
-			<p>
-				Nemo, eum cum. Modi ipsam deleniti cupiditate consectetur voluptas nobis sint aut
-				impedit dolorum. Laboriosam id et recusandae iusto fugit, iste quos quaerat dolorem
-				voluptate architecto nobis quisquam officiis vero.
-			</p>
-			<p>
-				Ullam ex, iste laudantium facilis repellat officiis quos voluptatum accusantium
-				porro neque ut molestiae fugiat asperiores id quia cum cupiditate voluptatem ea?
-				Ipsum, asperiores. Asperiores sapiente necessitatibus vel aspernatur alias?
-			</p>
 		</>
 	);
 }
