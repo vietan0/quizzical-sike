@@ -47,7 +47,8 @@ h6 {
 }
 
 #container {
-	margin: $d8 $d10;
+	margin: $d8 clamp($d4, 5vw, $d10);
+	max-width: 900px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -72,7 +73,8 @@ h6 {
 .quiz {
 	width: 100%;
 
-	h3 {
+	h2 {
+		font-size: calc(1rem + 0.9vw);
 		font-weight: 700;
 		letter-spacing: -0.5px;
 		margin-bottom: $d4;
@@ -80,13 +82,16 @@ h6 {
 
 	.options {
 		display: flex;
+		flex-wrap: wrap;
 		gap: $d3;
 
 		div {
-			padding: $d1 $d5;
+			font-size: 0.875rem;
+			padding: $d1 $d3;
 			border: 1px solid $blue-secondary;
 			border-radius: $d9;
 			text-align: center;
+			min-width: max-content;
 		}
 	}
 

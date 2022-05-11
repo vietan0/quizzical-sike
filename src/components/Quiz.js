@@ -8,8 +8,8 @@ export default function Quiz(props) {
 	// );
 
 	return (
-		<div className="quiz">
-			<h3>{props.question}</h3>
+		<article className="quiz">
+			<h2>{props.question}</h2>
 			<div className="options">
 				<Option text={props.correct_answer}/>
 				<Option text={props.incorrect_answers[0]}/>
@@ -17,6 +17,6 @@ export default function Quiz(props) {
 				<Option text={props.incorrect_answers[2]}/>
 			</div>
 			<hr />
-		</div>
+		</article>
 	);
 }
