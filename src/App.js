@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function App() {
-	let numDivs = new Array(15).fill(0).map((_, i) => <div>Item {i + 1}</div>);
 	return (
 		<>
 			<h1>App Banana goes here</h1>
@@ -12,7 +11,6 @@ export default function App() {
 				deleniti quod. Delectus quam praesentium laboriosam, perspiciatis rerum, hic nam
 				consequuntur voluptatem similique vel eum dolor sunt neque et magni maiores?
 			</p>
-			<div className="flex-container">{numDivs}</div>
 		</>
 	);
 }
