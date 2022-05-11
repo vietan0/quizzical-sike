@@ -44,6 +44,10 @@ h6 {
   border: none;
   border-radius: 8px;
 }
+#container .get-quizzes {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
 
 .quiz {
   width: 100%;
