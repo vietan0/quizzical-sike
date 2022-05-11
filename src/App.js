@@ -5,6 +5,7 @@ export default function App() {
 	return (
 		<>
 			<h1>App Banana goes here</h1>
+			<h2>One banana two bananas</h2>
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores temporibus dolores
 				atque sint quaerat dolore natus tempore et, voluptatibus, nobis fugit. Inventore ut
