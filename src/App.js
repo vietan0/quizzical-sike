@@ -1,5 +1,6 @@
 import React from "react";
 import Quiz from "./components/Quiz";
+import {nanoid} from "nanoid"
 
 export default function App() {
 	let [isBoarding, setIsBoarding] = React.useState(
@@ -31,6 +32,7 @@ export default function App() {
 			question={q.question}
 			correct_answer={q.correct_answer}
 			incorrect_answers={q.incorrect_answers}
+			key={nanoid()}
 		/>
 	));
 	return (
