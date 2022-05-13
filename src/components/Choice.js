@@ -6,8 +6,8 @@ export default function Choice(props) {
 	return (
 		<div
 			onClick={() => {
-				toggleSelect(id);
-				{correct && updateAnsStatus(quizId);};
+				toggleSelect(quizId, id);
+				updateAnsStatus(quizId);
 			}}
 			className={`${selected ? "selected" : ""}`}
 		>

@@ -4,25 +4,45 @@ import {nanoid} from "nanoid";
 
 export default function App() {
 	let [isBoarding, setIsBoarding] = useState(
-		() => JSON.parse(localStorage.getItem("isBoarding")) || true
+		() => JSON.parse(localStorage.getItem("isBoarding")) || false
 	);
 	let [quizzes, setQuizzes] = useState(() => JSON.parse(localStorage.getItem("quizzes")) || []);
-	let [ansStatus, setAnsStatus] = useState(() => {});
-	let [submitted, setSubmitted] = useState(false);
+	let [submitted, setSubmitted] = useState(
+		() => JSON.parse(localStorage.getItem("submitted")) || false
+	);
+	let [allChoices, setAllChoices] = useState(
+		() => JSON.parse(localStorage.getItem("allChoices")) || []
+	);
 	let [correctCount, setCorrectCount] = useState(0);
 
 	// sync local storage with state
 	useEffect(() => {
 		localStorage.setItem("isBoarding", JSON.stringify(isBoarding));
 		localStorage.setItem("quizzes", JSON.stringify(quizzes));
-	}, [isBoarding, quizzes]);
+		localStorage.setItem("submitted", JSON.stringify(submitted));
+		localStorage.setItem("allChoices", JSON.stringify(allChoices));
+	}, [isBoarding, quizzes, submitted, allChoices]);
 
 	function getNewQuizzes() {
 		fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
 			.then(res => res.json())
-			.then(data =>
-				setQuizzes(data.results.map(obj => ({...obj, ansStatus: false, id: nanoid()})))
-			);
+			.then(data => {
+				let quizArr = data.results.map(obj => ({...obj, ansStatus: false, id: nanoid()}));
+				setQuizzes(quizArr);
+				setAllChoices(
+					quizArr.map(obj => ({
+						choicesArr: [obj.correct_answer, ...obj.incorrect_answers]
+							.map((value, i) => ({
+								text: value,
+								correct: [true, false, false, false][i],
+								selected: false,
+								id: nanoid(),
+							}))
+							.sort(() => Math.random() - 0.5),
+						quizId: obj.id,
+					}))
+				);
+			});
 	}
 
 	function startSession() {
@@ -30,6 +50,23 @@ export default function App() {
 		getNewQuizzes();
 		setSubmitted(false);
 		window.scrollTo(0, 0);
+	}
+
+	function toggleSelect(selectedQuizId, selectedChoiceId) {
+		setAllChoices(oldArr =>
+			oldArr.map(obj =>
+				selectedQuizId === obj.quizId
+					? {
+							quizId: obj.quizId,
+							choicesArr: obj.choicesArr.map(choiceObj =>
+								selectedChoiceId === choiceObj.id
+									? {...choiceObj, selected: !choiceObj.selected}
+									: {...choiceObj, selected: false}
+							),
+					  }
+					: obj
+			)
+		);
 	}
 
 	function updateAnsStatus(selectedId) {
@@ -45,11 +82,11 @@ export default function App() {
 		setCorrectCount(quizzes.filter(quizObj => quizObj.ansStatus).length);
 	}
 
-	let quizElements = quizzes.map(q => (
+	let quizElements = quizzes.map((q, i) => (
 		<Quiz
 			question={q.question}
-			correct_answer={q.correct_answer}
-			incorrect_answers={q.incorrect_answers}
+			choices={allChoices[i]}
+			toggleSelect={toggleSelect}
 			ansStatus={q.ansStatus}
 			updateAnsStatus={updateAnsStatus}
 			id={q.id}
@@ -70,7 +107,7 @@ export default function App() {
 						className="giphy-embed"
 						allowFullScreen
 					></iframe>
-				
+
 					<small>
 						Built using{" "}
 						<a href="https://opentdb.com/api_config.php" target="_blank">
@@ -82,7 +119,7 @@ export default function App() {
 				<>
 					<>{quizElements}</>
 					<button
-						onClick={!submitted ? checkAnswers : startSession}
+						onClick={submitted ? startSession : checkAnswers}
 						className="check-answer"
 					>
 						{submitted ? "Replay" : "Check answers"}
