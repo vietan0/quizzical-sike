@@ -1,17 +1,19 @@
 import React from "react";
 import Choice from "./Choice";
 import {nanoid} from "nanoid";
-import unEscape from "../unEscape"
+import unEscape from "../unEscape";
 
 export default function Quiz(props) {
 	// combine two 1D arrays into a 2D array
 	let [choices, setChoices] = React.useState(() =>
-		[props.correct_answer, ...props.incorrect_answers].map((value, i) => ({
-			text: value,
-			correct: [true, false, false, false][i],
-			selected: false,
-			id: nanoid(),
-		}))
+		[props.correct_answer, ...props.incorrect_answers]
+			.map((value, i) => ({
+				text: value,
+				correct: [true, false, false, false][i],
+				selected: false,
+				id: nanoid(),
+			}))
+			.sort(() => Math.random() - 0.5)
 	);
 
 	function toggleSelect(selectedId) {
@@ -26,22 +28,6 @@ export default function Quiz(props) {
 			)
 		);
 	}
-
-	// shuffle the objects before render into <Choice />s
-	React.useEffect(() => {
-		setChoices(oldChoices => {
-			for (let i = 1; i <= 3; i++) {
-				let divs = [];
-				let randomIndex = Math.floor(Math.random() * 3);
-				divs = [
-					oldChoices[randomIndex],
-					...oldChoices.slice(0, randomIndex),
-					...oldChoices.slice(randomIndex + 1),
-				];
-				return divs;
-			}
-		});
-	}, []);
 
 	let choiceDivs = choices.map(c => (
 		<Choice
