@@ -1,5 +1,5 @@
 import React from "react";
-import unEscape from "../unEscape";
+import {decode} from "html-entities";
 
 export default function Choice(props) {
 	return (
@@ -7,7 +7,7 @@ export default function Choice(props) {
 			onClick={() => props.toggleSelect(props.id)}
 			className={`${props.selected ? "selected" : ""}`}
 		>
-			{unEscape(props.text)} {props.correct && `💎`}
+			{decode(props.text)} {props.correct && `💎`}
 		</div>
 	);
 }

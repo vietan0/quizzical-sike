@@ -1,7 +1,7 @@
 import React from "react";
 import Choice from "./Choice";
 import {nanoid} from "nanoid";
-import unEscape from "../unEscape";
+import {decode} from "html-entities";
 
 export default function Quiz(props) {
 	// combine two 1D arrays into a 2D array
@@ -42,7 +42,7 @@ export default function Quiz(props) {
 
 	return (
 		<article className="quiz">
-			<h2>{unEscape(props.question)}</h2>
+			<h2>{decode(props.question)}</h2>
 			<div className="options">{choiceDivs}</div>
 			{/* <pre>{JSON.stringify(choices, null, 4)}</pre> */}
 			<hr />
