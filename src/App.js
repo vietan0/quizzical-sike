@@ -30,14 +30,6 @@ export default function App() {
 		getNewQuizzes();
 	}
 
-	/* 
-		checkAnswers() {
-			// setIsAnsweredCorrectly: true
-		}
-
-		then pass function down to <Quiz checkAnswers = {checkAnswers} />
-	*/
-
 	let quizElements = quizzes.map(q => (
 		<Quiz
 			question={q.question}

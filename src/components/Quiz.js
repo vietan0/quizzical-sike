@@ -27,7 +27,6 @@ export default function Quiz(props) {
 		);
 	}
 
-
 	// shuffle the objects before render into <Choice />s
 	React.useEffect(() => {
 		setChoices(oldChoices => {

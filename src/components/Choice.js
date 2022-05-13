@@ -7,7 +7,7 @@ export default function Choice(props) {
 			onClick={() => props.toggleSelect(props.id)}
 			className={`${props.selected ? "selected" : ""}`}
 		>
-			{unEscape(props.text)} {props.correct && `- the correct one`}
+			{unEscape(props.text)} {props.correct && `💎`}
 		</div>
 	);
 }
