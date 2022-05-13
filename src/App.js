@@ -73,7 +73,7 @@ export default function App() {
 		setQuizzes(quizzes =>
 			quizzes.map(quizObj =>
 				selectedId === quizObj.id
-					? {...quizObj, ansStatus: correct ? selected ? false : true : false}
+					? {...quizObj, ansStatus: correct ? (selected ? false : true) : false}
 					: quizObj
 			)
 		);
@@ -112,7 +112,7 @@ export default function App() {
 					></iframe>
 
 					<small>
-						Built using{" "}
+						Built with data from{" "}
 						<a href="https://opentdb.com/api_config.php" target="_blank">
 							Open Trivia Database
 						</a>
@@ -121,17 +121,21 @@ export default function App() {
 			) : (
 				<>
 					<>{quizElements}</>
-					<button
-						onClick={submitted ? startSession : checkAnswers}
-						className="check-answer"
-					>
-						{submitted ? "Replay" : "Check answers"}
-					</button>
-					{submitted && (
-						<p className="result">
-							You got {correctCount}/5 questions right! Good job! ✨
-						</p>
-					)}
+					<div id="bottom-row">
+						{submitted && (
+							<p className="result">
+								{correctCount <= 1 && `You can do better next time!`}
+								{correctCount > 1 &&
+									correctCount < 5 &&
+									`You got ${correctCount}/5 questions right! Good job!`}
+								{correctCount == 5 &&
+									`✨Perfect ✨ score! You should up the stakes!`}
+							</p>
+						)}
+						<button onClick={submitted ? startSession : checkAnswers}>
+							{submitted ? "Replay" : "Check answers"}
+						</button>
+					</div>
 				</>
 			)}
 		</div>

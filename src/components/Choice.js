@@ -11,6 +11,7 @@ export default function Choice(props) {
 			}}
 			className={`
 				${selected ? "selected" : ""}
+				${submitted ? "submitted" : ""}
 				${
 					submitted
 						? correct
@@ -19,7 +20,7 @@ export default function Choice(props) {
 								: "missed"
 							: selected
 							? "wrong"
-							: "not-correct"
+							: "not-selected"
 						: ""
 				}
 			`}

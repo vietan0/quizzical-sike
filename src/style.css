@@ -39,15 +39,39 @@ h6 {
   letter-spacing: -1.5px;
 }
 #container button {
-  background-color: hsl(230deg, 34%, 46%);
-  color: hsl(220deg, 43%, 97%);
-  padding: 12px 40px;
+  color: hsl(231deg, 42%, 28%);
+  font-family: "Karla", "Inter", sans-serif;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  background-color: transparent;
+  outline: 3px solid hsl(230deg, 34%, 46%);
+  padding: 8px 40px;
   border: none;
-  border-radius: 8px;
+  border-radius: 80px;
+  transition: 0.1s ease-out;
+}
+#container button:hover {
+  color: hsl(220deg, 43%, 97%);
+  outline: none;
+  background-color: hsl(230deg, 34%, 46%);
 }
 #container .get-quizzes {
   margin-top: 32px;
   margin-bottom: 32px;
+}
+#container #bottom-row {
+  width: 100%;
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+}
+#container #bottom-row .result {
+  font-family: "Karla", "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .quiz {
@@ -76,12 +100,14 @@ h6 {
   transition: all 0.1s ease-out;
 }
 .quiz .choices div:hover {
-  outline: none;
-  background-color: hsl(230deg, 61%, 95%);
+  background-color: hsl(230deg, 61%, 90%);
 }
 .quiz .choices div.selected {
   outline: none;
   background-color: hsl(230deg, 61%, 90%);
+}
+.quiz .choices div.submitted {
+  pointer-events: none;
 }
 .quiz .choices div.correct {
   outline: none;
@@ -95,7 +121,7 @@ h6 {
   outline: none;
   background-color: hsl(0deg, 81%, 85%);
 }
-.quiz .choices div.not-correct {
+.quiz .choices div.not-selected {
   opacity: 0.5;
 }
 .quiz hr {
@@ -111,13 +137,6 @@ pre {
   font-size: 1rem;
   width: 100%;
   margin-top: 16px;
-}
-
-.result {
-  font-family: "Karla", "Inter", sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  margin-top: 24px;
 }
 
 /*# sourceMappingURL=style.css.map */

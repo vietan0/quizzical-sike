@@ -3,7 +3,7 @@ $blue-primary: hsla(231, 42%, 28%, 1);
 $blue-secondary: hsla(230, 34%, 46%, 1);
 $blue-divider: hsla(231, 42%, 90%, 1);
 $green-correct: hsla(133, 46%, 71%, 1);
-$blue-hover: hsla(230, 61%, 95%, 1);
+$blue-hover: hsla(230, 61%, 90%, 1);
 $blue-selected: hsla(230, 61%, 90%, 1);
 $red-wrong: hsla(360, 81%, 85%, 1);
 
@@ -64,16 +64,43 @@ h6 {
 	}
 
 	button {
-		background-color: $blue-secondary;
-		color: $blue-bg;
-		padding: $d3 $d7;
+		color: $blue-primary;
+		font-family: $heading-text;
+		font-weight: bold;
+		letter-spacing: -0.5px;
+		background-color: transparent;
+		outline: 3px solid $blue-secondary;
+		padding: $d2 $d7;
 		border: none;
-		border-radius: $d2;
+		border-radius: $d10;
+		transition: 0.1s ease-out;
+	}
+
+	button:hover {
+		color: $blue-bg;
+		outline: none;
+		background-color: $blue-secondary;
 	}
 
 	.get-quizzes {
 		margin-top: $d6;
 		margin-bottom: $d6;
+	}
+
+	#bottom-row {
+		width: 100%;
+		display: flex;
+		gap: $d6;
+		justify-content: center;
+		align-items: center;
+
+		.result {
+			font-family: $heading-text;
+			font-size: $d5;
+			font-weight: bold;
+			letter-spacing: -0.5px;
+			margin: 0;
+		}
 	}
 }
 
@@ -105,13 +132,16 @@ h6 {
 		}
 
 		div:hover {
-			outline: none;
 			background-color: $blue-hover;
 		}
 
 		div.selected {
 			outline: none;
 			background-color: $blue-selected;
+		}
+
+		div.submitted {
+			pointer-events: none;
 		}
 
 		div.correct {
@@ -129,7 +159,7 @@ h6 {
 			background-color: $red-wrong;
 		}
 
-		div.not-correct {
+		div.not-selected {
 			opacity: 0.5;
 		}
 	}
@@ -149,11 +179,4 @@ pre {
 	font-size: 1rem;
 	width: 100%;
 	margin-top: $d4;
-}
-
-.result {
-	font-family: $heading-text;
-	font-size: $d6;
-	font-weight: bold;
-	margin-top: $d5;
 }
