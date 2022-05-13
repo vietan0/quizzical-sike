@@ -69,10 +69,12 @@ export default function App() {
 		);
 	}
 
-	function updateAnsStatus(selectedId) {
+	function updateAnsStatus(selectedId, correct, selected) {
 		setQuizzes(quizzes =>
 			quizzes.map(quizObj =>
-				selectedId === quizObj.id ? {...quizObj, ansStatus: !quizObj.ansStatus} : quizObj
+				selectedId === quizObj.id
+					? {...quizObj, ansStatus: correct ? selected ? false : true : false}
+					: quizObj
 			)
 		);
 	}
@@ -91,6 +93,7 @@ export default function App() {
 			updateAnsStatus={updateAnsStatus}
 			id={q.id}
 			key={q.id}
+			submitted={submitted}
 		/>
 	));
 	return (

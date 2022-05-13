@@ -3,7 +3,7 @@ import Choice from "./Choice";
 import {decode} from "html-entities";
 
 export default function Quiz(props) {
-	const {question, choices, toggleSelect, ansStatus, updateAnsStatus, id} = props;
+	const {question, choices, toggleSelect, ansStatus, updateAnsStatus, id, submitted} = props;
 
 	let choiceDivs = choices.choicesArr.map(c => (
 		<Choice
@@ -15,16 +15,14 @@ export default function Quiz(props) {
 			toggleSelect={toggleSelect}
 			updateAnsStatus={updateAnsStatus}
 			quizId={id}
+			submitted={submitted}
 		/>
 	));
 
 	return (
 		<article className="quiz">
-			<h2>
-				{decode(question)} {ansStatus ? "✅" : "❌"}
-			</h2>
+			<h2>{decode(question)}</h2>
 			<div className="choices">{choiceDivs}</div>
-			{/* <pre>{JSON.stringify(props, null, 4)}</pre> */}
 			<hr />
 		</article>
 	);

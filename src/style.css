@@ -83,8 +83,23 @@ h6 {
   outline: none;
   background-color: hsl(230deg, 61%, 90%);
 }
+.quiz .choices div.correct {
+  outline: none;
+  background-color: hsl(133deg, 46%, 71%);
+}
+.quiz .choices div.missed {
+  outline: none;
+  background-color: hsl(230deg, 61%, 90%);
+}
+.quiz .choices div.wrong {
+  outline: none;
+  background-color: hsl(0deg, 81%, 85%);
+}
+.quiz .choices div.not-correct {
+  opacity: 0.5;
+}
 .quiz hr {
-  margin: 2rem 0;
+  margin: 24px 0;
 }
 .quiz hr:not([size]) {
   height: 3px;

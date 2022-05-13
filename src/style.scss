@@ -109,15 +109,33 @@ h6 {
 			background-color: $blue-hover;
 		}
 
-
 		div.selected {
 			outline: none;
 			background-color: $blue-selected;
 		}
+
+		div.correct {
+			outline: none;
+			background-color: $green-correct;
+		}
+
+		div.missed {
+			outline: none;
+			background-color: $blue-selected;
+		}
+
+		div.wrong {
+			outline: none;
+			background-color: $red-wrong;
+		}
+
+		div.not-correct {
+			opacity: 0.5;
+		}
 	}
 
 	hr {
-		margin: 2rem 0;
+		margin: $d5 0;
 	}
 
 	hr:not([size]) {
