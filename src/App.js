@@ -111,7 +111,7 @@ export default function App() {
 		setSubmitted(true);
 		setCorrectCount(quizzes.filter(quizObj => quizObj.ansStatus).length);
 	}
-	
+
 	let quizElements = quizzes.map((q, i) => (
 		<Quiz
 			question={q.question}
@@ -231,15 +231,17 @@ export default function App() {
 	let mainScreen = () => {
 		return (
 			<div id="main-screen">
-				<>{quizElements}</>
+				<h1>Quizzical</h1>
+				<div id="quizzes">{quizElements}</div>
 				<div id="bottom-row">
 					{submitted && (
 						<p className="result">
-							{correctCount == 0 &&
-								`You got ${correctCount}/${formData.numberOfQuestions} questions. Better luck next time?`}
+							{correctCount / formData.numberOfQuestions <= 0.4 &&
+								`You only got ${correctCount}/${formData.numberOfQuestions} questions 😵. Better luck next time?`}
 							{correctCount > 0 &&
 								correctCount < formData.numberOfQuestions &&
-								`You got ${correctCount}/${formData.numberOfQuestions} questions right! Good job!`}
+								correctCount / formData.numberOfQuestions > 0.4 &&
+								`You got ${correctCount}/${formData.numberOfQuestions} questions right! Good job! 🎉`}
 							{correctCount == formData.numberOfQuestions &&
 								`✨Perfect✨ score! You should up the stakes!`}
 						</p>

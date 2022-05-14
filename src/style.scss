@@ -19,8 +19,8 @@ $d9: 64px;
 $d10: 80px;
 $d11: 96px;
 
-$heading-text: "Karla", "Inter", sans-serif;
-$body-text: "Inter", "Helvetica", sans-serif;
+$heading-text: "Manrope", "Inter", sans-serif;
+$body-text: "Rubik", "Inter", "Helvetica", sans-serif;
 
 body {
 	font-family: $body-text;
@@ -33,7 +33,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+label {
 	font-family: $heading-text;
 }
 
@@ -42,7 +43,6 @@ button {
 	font-family: $heading-text;
 	font-weight: bold;
 	font-size: 20px;
-	letter-spacing: -0.5px;
 	background-color: transparent;
 	padding: $d2 $d7;
 	border: 3px solid $blue-secondary;
@@ -56,7 +56,7 @@ button:hover {
 }
 
 button:focus {
-	border: 3px solid hsl(230deg, 34%, 46%);
+	border: 3px solid $blue-secondary;
 }
 
 #root {
@@ -94,8 +94,8 @@ button:focus {
 
 		h1 {
 			font-size: calc($d7 + 1.5vw);
-			font-weight: 700;
-			letter-spacing: -3px;
+			font-weight: 800;
+			letter-spacing: -1px;
 		}
 
 		form {
@@ -135,12 +135,21 @@ button:focus {
 
 #main-screen {
 	margin: $d10 clamp($d4, 5vw, $d9);
+	margin-top: $d6;
 	max-width: 800px;
 	display: flex;
 	flex-direction: column;
 	gap: $d2;
 	align-items: center;
 	justify-content: space-between;
+
+	h1 {
+		font-size: calc($d3 + 1.5vw);
+		font-weight: 800;
+		letter-spacing: -1px;
+		margin-bottom: $d8;
+		width: 100%;
+	}
 
 	.quiz {
 		width: 100%;
@@ -156,7 +165,6 @@ button:focus {
 		h2 {
 			font-size: min(calc(1rem + 0.9vw), 22px);
 			font-weight: 700;
-			letter-spacing: -0.5px;
 			margin-bottom: $d4;
 		}
 
