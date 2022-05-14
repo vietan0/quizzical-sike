@@ -135,7 +135,7 @@ button:focus {
 
 #main-screen {
 	margin: $d10 clamp($d4, 5vw, $d9);
-	max-width: 900px;
+	max-width: 800px;
 	display: flex;
 	flex-direction: column;
 	gap: $d2;
@@ -144,6 +144,14 @@ button:focus {
 
 	.quiz {
 		width: 100%;
+		position: relative;
+
+		.index {
+			position: absolute;
+			left: -$d9;
+			width: $d7;
+			text-align: right;
+		}
 
 		h2 {
 			font-size: min(calc(1rem + 0.9vw), 22px);

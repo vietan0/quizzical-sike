@@ -121,6 +121,7 @@ export default function App() {
 			updateAnsStatus={updateAnsStatus}
 			id={q.id}
 			key={q.id}
+			index={i}
 			submitted={submitted}
 		/>
 	));

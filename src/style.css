@@ -102,7 +102,7 @@ button:focus {
 
 #main-screen {
   margin: 80px clamp(16px, 5vw, 64px);
-  max-width: 900px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -111,6 +111,13 @@ button:focus {
 }
 #main-screen .quiz {
   width: 100%;
+  position: relative;
+}
+#main-screen .quiz .index {
+  position: absolute;
+  left: -64px;
+  width: 40px;
+  text-align: right;
 }
 #main-screen .quiz h2 {
   font-size: min(1rem + 0.9vw, 22px);
