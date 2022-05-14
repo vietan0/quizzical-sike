@@ -37,6 +37,28 @@ h6 {
 	font-family: $heading-text;
 }
 
+button {
+	color: $blue-primary;
+	font-family: $heading-text;
+	font-weight: bold;
+	font-size: 20px;
+	letter-spacing: -0.5px;
+	background-color: transparent;
+	padding: $d2 $d7;
+	border: 3px solid $blue-secondary;
+	border-radius: $d10;
+	transition: 0.1s ease-out;
+}
+
+button:hover {
+	color: $blue-bg;
+	background-color: $blue-secondary;
+}
+
+button:focus {
+	border: 3px solid hsl(230deg, 34%, 46%);
+}
+
 #root {
 	display: flex;
 	justify-content: center;
@@ -47,46 +69,148 @@ h6 {
 	background-size: 30%;
 }
 
-#container {
-	margin: $d10 clamp($d4, 5vw, $d10);
-	max-width: 800px;
+#boarding-screen {
+	margin: $d11 max($d4, 5vw);
+	max-width: 1200px;
 	display: flex;
-	gap: $d4;
-	flex-direction: column;
+	flex-wrap: wrap;
+	gap: $d8;
+	justify-content: space-between;
 	align-items: center;
-	justify-content: center;
 	flex-grow: 1;
 
-	h1 {
-		font-size: $d8;
-		font-weight: 700;
-		letter-spacing: -1.5px;
+	pre {
+		white-space: pre-wrap;
+		font-size: 1rem;
+		width: 100%;
+		margin-top: $d4;
 	}
 
-	button {
-		color: $blue-primary;
-		font-family: $heading-text;
-		font-weight: bold;
-		letter-spacing: -0.5px;
-		background-color: transparent;
-		outline: 3px solid $blue-secondary;
-		padding: $d2 $d7;
-		border: none;
-		border-radius: $d10;
-		transition: 0.1s ease-out;
+	.left {
+		display: flex;
+		flex-direction: column;
+		gap: $d4;
+		flex: 1 1 320px;
+
+		h1 {
+			font-size: calc($d7 + 1.5vw);
+			font-weight: 700;
+			letter-spacing: -3px;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			gap: $d4;
+
+			label {
+				margin-bottom: $d1;
+			}
+
+			input,
+			select {
+				color: inherit;
+				padding-top: $d3;
+				padding-bottom: $d3;
+			}
+		}
+
+		button {
+			margin-top: $d4;
+		}
 	}
 
-	button:hover {
-		color: $blue-bg;
-		outline: none;
-		background-color: $blue-secondary;
-	}
+	.right {
+		display: flex;
+		flex-direction: column;
+		gap: $d4;
+		align-items: center;
+		flex: 1 1 320px;
 
-	.get-quizzes {
-		margin-top: $d6;
-		margin-bottom: $d6;
+		.giphy-embed {
+			width: 100%;
+		}
 	}
+}
 
+#main-screen {
+	margin: $d10 clamp($d4, 5vw, $d9);
+	max-width: 900px;
+	display: flex;
+	flex-direction: column;
+	gap: $d2;
+	align-items: center;
+	justify-content: space-between;
+
+	.quiz {
+		width: 100%;
+
+		h2 {
+			font-size: min(calc(1rem + 0.9vw), 22px);
+			font-weight: 700;
+			letter-spacing: -0.5px;
+			margin-bottom: $d4;
+		}
+
+		.choices {
+			display: flex;
+			flex-wrap: wrap;
+			gap: $d3;
+
+			div {
+				font-size: 0.875rem;
+				padding: $d1 $d3;
+				outline: 1px solid $blue-secondary;
+				border-radius: $d9;
+				text-align: center;
+				min-width: max-content;
+				cursor: pointer;
+				user-select: none;
+				transition: all 0.1s ease-out;
+			}
+
+			div:hover {
+				background-color: $blue-hover;
+			}
+
+			div.selected {
+				outline: none;
+				background-color: $blue-selected;
+			}
+
+			div.submitted {
+				pointer-events: none;
+			}
+
+			div.correct {
+				outline: none;
+				background-color: $green-correct;
+			}
+
+			div.missed {
+				outline: none;
+				background-color: $blue-selected;
+			}
+
+			div.wrong {
+				outline: none;
+				background-color: $red-wrong;
+			}
+
+			div.not-selected {
+				opacity: 0.5;
+			}
+		}
+
+		hr {
+			margin: $d5 0;
+		}
+
+		hr:not([size]) {
+			height: 3px;
+			background-color: $blue-divider;
+		}
+	}
 	#bottom-row {
 		width: 100%;
 		display: flex;
@@ -104,79 +228,8 @@ h6 {
 	}
 }
 
-.quiz {
-	width: 100%;
-
-	h2 {
-		font-size: min(calc(1rem + 0.9vw), 22px);
-		font-weight: 700;
-		letter-spacing: -0.5px;
-		margin-bottom: $d4;
+@media (min-width: 780px) {
+	form {
+		max-width: 400px;
 	}
-
-	.choices {
-		display: flex;
-		flex-wrap: wrap;
-		gap: $d3;
-
-		div {
-			font-size: 0.875rem;
-			padding: $d1 $d3;
-			outline: 1px solid $blue-secondary;
-			border-radius: $d9;
-			text-align: center;
-			min-width: max-content;
-			cursor: pointer;
-			user-select: none;
-			transition: all 0.1s ease-out;
-		}
-
-		div:hover {
-			background-color: $blue-hover;
-		}
-
-		div.selected {
-			outline: none;
-			background-color: $blue-selected;
-		}
-
-		div.submitted {
-			pointer-events: none;
-		}
-
-		div.correct {
-			outline: none;
-			background-color: $green-correct;
-		}
-
-		div.missed {
-			outline: none;
-			background-color: $blue-selected;
-		}
-
-		div.wrong {
-			outline: none;
-			background-color: $red-wrong;
-		}
-
-		div.not-selected {
-			opacity: 0.5;
-		}
-	}
-
-	hr {
-		margin: $d5 0;
-	}
-
-	hr:not([size]) {
-		height: 3px;
-		background-color: $blue-divider;
-	}
-}
-
-pre {
-	white-space: pre-wrap;
-	font-size: 1rem;
-	width: 100%;
-	margin-top: $d4;
 }
