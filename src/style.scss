@@ -38,25 +38,28 @@ label {
 	font-family: $heading-text;
 }
 
+h1 {
+	font-weight: 800;
+	letter-spacing: -1px;
+}
+
 button {
-	color: $blue-primary;
 	font-family: $heading-text;
 	font-weight: bold;
 	font-size: 20px;
-	background-color: transparent;
-	padding: $d2 $d7;
-	border: 3px solid $blue-secondary;
-	border-radius: $d10;
-	transition: 0.1s ease-out;
-}
 
-button:hover {
-	color: $blue-bg;
+	color: white;
 	background-color: $blue-secondary;
-}
 
-button:focus {
-	border: 3px solid $blue-secondary;
+	border: none;
+	border-radius: $d10;
+	padding: $d2 $d8;
+	margin-top: $d4;
+	transition: 0.1s ease-out;
+
+	&:hover {
+		background-color: $blue-primary;
+	}
 }
 
 #root {
@@ -92,10 +95,14 @@ button:focus {
 		gap: $d4;
 		flex: 1 1 320px;
 
-		h1 {
-			font-size: calc($d7 + 1.5vw);
-			font-weight: 800;
-			letter-spacing: -1px;
+		header {
+			h1 {
+				font-size: calc($d7 + 1.5vw);
+			}
+
+			p {
+				font-size: 20px;
+			}
 		}
 
 		form {
@@ -114,10 +121,6 @@ button:focus {
 				padding-bottom: $d3;
 			}
 		}
-
-		button {
-			margin-top: $d4;
-		}
 	}
 
 	.right {
@@ -128,27 +131,53 @@ button:focus {
 		flex: 1 1 320px;
 
 		.giphy-embed {
-			width: 100%;
+			width: 50%;
 		}
 	}
 }
 
 #main-screen {
-	margin: $d10 clamp($d4, 5vw, $d9);
-	margin-top: $d6;
+	margin: $d6 max($d7, 16vw) $d10 max($d7, 16vw);
 	max-width: 800px;
+	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
 	gap: $d2;
 	align-items: center;
 	justify-content: space-between;
 
-	h1 {
-		font-size: calc($d3 + 1.5vw);
-		font-weight: 800;
-		letter-spacing: -1px;
-		margin-bottom: $d8;
+	& > * {
 		width: 100%;
+	}
+	header {
+		margin-bottom: $d8;
+		position: relative;
+
+		h1 {
+			font-size: max($d5, calc($d3 + 1.5vw));
+		}
+
+		button {
+			background-color: transparent;
+			color: inherit;
+			outline: 1px solid $blue-secondary;
+			width: 40px;
+			height: 40px;
+			padding: 10px;
+			position: absolute;
+			top: -20px;
+			left: -$d9;
+
+			&:hover {
+				background-color: $blue-hover;
+			}
+		}
+
+		.material-symbols-outlined {
+			font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+			font-size: 20px;
+			display: block;
+		}
 	}
 
 	.quiz {
@@ -157,7 +186,7 @@ button:focus {
 
 		.index {
 			position: absolute;
-			left: -$d9;
+			left: -$d8;
 			width: $d7;
 			text-align: right;
 		}
@@ -183,69 +212,91 @@ button:focus {
 				cursor: pointer;
 				user-select: none;
 				transition: all 0.1s ease-out;
-			}
 
-			div:hover {
-				background-color: $blue-hover;
-			}
+				&:hover {
+					background-color: $blue-hover;
+				}
 
-			div.selected {
-				outline: none;
-				background-color: $blue-selected;
-			}
-
-			div.submitted {
-				pointer-events: none;
-			}
-
-			div.correct {
-				outline: none;
-				background-color: $green-correct;
-			}
-
-			div.missed {
-				outline: none;
-				background-color: $blue-selected;
-			}
-
-			div.wrong {
-				outline: none;
-				background-color: $red-wrong;
-			}
-
-			div.not-selected {
-				opacity: 0.5;
+				&.selected {
+					outline: none;
+					background-color: $blue-selected;
+				}
+				&.submitted {
+					pointer-events: none;
+				}
+				&.correct {
+					outline: none;
+					background-color: $green-correct;
+				}
+				&.missed {
+					outline: none;
+					background-color: $blue-selected;
+				}
+				&.wrong {
+					outline: none;
+					background-color: $red-wrong;
+				}
+				&.not-selected {
+					opacity: 0.5;
+				}
 			}
 		}
 
 		hr {
 			margin: $d5 0;
-		}
-
-		hr:not([size]) {
-			height: 3px;
-			background-color: $blue-divider;
+			&:not([size]) {
+				height: 3px;
+				background-color: $blue-divider;
+			}
 		}
 	}
+
 	#bottom-row {
 		width: 100%;
 		display: flex;
+		flex-wrap: wrap;
 		gap: $d6;
 		justify-content: center;
 		align-items: center;
 
-		.result {
+		.result-text {
 			font-family: $heading-text;
-			font-size: $d5;
+			font-size: clamp(20px, 5vw, $d5);
 			font-weight: bold;
 			letter-spacing: -0.5px;
 			margin: 0;
+		}
+
+		button {
+			margin-top: 0;
+		}
+	}
+}
+
+@media (max-width: 450px) {
+	#main-screen header {
+		display: flex;
+		align-items: center;
+		gap: $d4;
+
+		h1 {
+			margin-bottom: 0;
+		}
+
+		button {
+			position: static;
+			margin-top: 0;
+			order: -1;
 		}
 	}
 }
 
 @media (min-width: 780px) {
-	form {
-		max-width: 400px;
+	#boarding-screen .left form {
+		max-width: 420px;
+	}
+
+	#main-screen .quiz .index {
+		left: -$d9;
 	}
 }

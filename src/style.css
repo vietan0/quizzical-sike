@@ -14,25 +14,25 @@ label {
   font-family: "Manrope", "Inter", sans-serif;
 }
 
+h1 {
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
 button {
-  color: hsl(231deg, 42%, 28%);
   font-family: "Manrope", "Inter", sans-serif;
   font-weight: bold;
   font-size: 20px;
-  background-color: transparent;
-  padding: 8px 40px;
-  border: 3px solid hsl(230deg, 34%, 46%);
+  color: white;
+  background-color: hsl(230deg, 34%, 46%);
+  border: none;
   border-radius: 80px;
+  padding: 8px 56px;
+  margin-top: 16px;
   transition: 0.1s ease-out;
 }
-
 button:hover {
-  color: hsl(220deg, 43%, 97%);
-  background-color: hsl(230deg, 34%, 46%);
-}
-
-button:focus {
-  border: 3px solid hsl(230deg, 34%, 46%);
+  background-color: hsl(231deg, 42%, 28%);
 }
 
 #root {
@@ -67,10 +67,11 @@ button:focus {
   gap: 16px;
   flex: 1 1 320px;
 }
-#boarding-screen .left h1 {
+#boarding-screen .left header h1 {
   font-size: calc(40px + 1.5vw);
-  font-weight: 800;
-  letter-spacing: -1px;
+}
+#boarding-screen .left header p {
+  font-size: 20px;
 }
 #boarding-screen .left form {
   display: flex;
@@ -86,9 +87,6 @@ button:focus {
   padding-top: 12px;
   padding-bottom: 12px;
 }
-#boarding-screen .left button {
-  margin-top: 16px;
-}
 #boarding-screen .right {
   display: flex;
   flex-direction: column;
@@ -97,25 +95,47 @@ button:focus {
   flex: 1 1 320px;
 }
 #boarding-screen .right .giphy-embed {
-  width: 100%;
+  width: 50%;
 }
 
 #main-screen {
-  margin: 80px clamp(16px, 5vw, 64px);
-  margin-top: 32px;
+  margin: 32px max(40px, 16vw) 80px max(40px, 16vw);
   max-width: 800px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
   align-items: center;
   justify-content: space-between;
 }
-#main-screen h1 {
-  font-size: calc(12px + 1.5vw);
-  font-weight: 800;
-  letter-spacing: -1px;
-  margin-bottom: 56px;
+#main-screen > * {
   width: 100%;
+}
+#main-screen header {
+  margin-bottom: 56px;
+  position: relative;
+}
+#main-screen header h1 {
+  font-size: max(24px, 12px + 1.5vw);
+}
+#main-screen header button {
+  background-color: transparent;
+  color: inherit;
+  outline: 1px solid hsl(230deg, 34%, 46%);
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  position: absolute;
+  top: -20px;
+  left: -64px;
+}
+#main-screen header button:hover {
+  background-color: hsl(230deg, 61%, 90%);
+}
+#main-screen header .material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  font-size: 20px;
+  display: block;
 }
 #main-screen .quiz {
   width: 100%;
@@ -123,7 +143,7 @@ button:focus {
 }
 #main-screen .quiz .index {
   position: absolute;
-  left: -64px;
+  left: -56px;
   width: 40px;
   text-align: right;
 }
@@ -183,21 +203,44 @@ button:focus {
 #main-screen #bottom-row {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   gap: 32px;
   justify-content: center;
   align-items: center;
 }
-#main-screen #bottom-row .result {
+#main-screen #bottom-row .result-text {
   font-family: "Manrope", "Inter", sans-serif;
-  font-size: 24px;
+  font-size: clamp(20px, 5vw, 24px);
   font-weight: bold;
   letter-spacing: -0.5px;
   margin: 0;
 }
+#main-screen #bottom-row button {
+  margin-top: 0;
+}
 
+@media (max-width: 450px) {
+  #main-screen header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  #main-screen header h1 {
+    margin-bottom: 0;
+  }
+  #main-screen header button {
+    position: static;
+    margin-top: 0;
+    order: -1;
+  }
+}
 @media (min-width: 780px) {
-  form {
-    max-width: 400px;
+  #boarding-screen .left form {
+    max-width: 420px;
+  }
+
+  #main-screen .quiz .index {
+    left: -64px;
   }
 }
 

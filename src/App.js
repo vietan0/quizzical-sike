@@ -107,10 +107,26 @@ export default function App() {
 		);
 	}
 
+	let [resultText, setResultText] = useState("");
+
 	function checkAnswers() {
 		setSubmitted(true);
 		setCorrectCount(quizzes.filter(quizObj => quizObj.ansStatus).length);
 	}
+
+	useEffect(() =>
+		setResultText(() => {
+			if (correctCount == 0)
+				return `Zero for ${formData.numberOfQuestions} 😵. Maybe try some easier questions ?`;
+			else if (correctCount / formData.numberOfQuestions <= 0.4)
+				return `You only got ${correctCount}/${formData.numberOfQuestions} questions. Next time will be better 💪!`;
+			else if (correctCount < formData.numberOfQuestions)
+				return `You got ${correctCount}/${formData.numberOfQuestions} questions right! Good job! 🎉`;
+			else return `✨Perfect✨ score! You should up the stakes!`;
+		}),
+		[correctCount]
+	);
+	
 
 	let quizElements = quizzes.map((q, i) => (
 		<Quiz
@@ -130,8 +146,11 @@ export default function App() {
 		return (
 			<div id="boarding-screen">
 				<div className="left">
-					<h1>Quizzical</h1>
-					<pre>{JSON.stringify(url, null, 4)}</pre>
+					<header>
+						<h1>Quizzical</h1>
+						<p>Test your knowledge with some quick trivia!</p>
+					</header>
+					{/* <pre>{JSON.stringify(url, null, 4)}</pre> */}
 					<form action="#">
 						<div>
 							<label htmlFor="number-of-questions">
@@ -147,6 +166,23 @@ export default function App() {
 								min="1"
 								max="50"
 							></input>
+						</div>
+						<div>
+							<label htmlFor="difficulty">
+								<b>Select Difficulty</b>
+							</label>
+							<select
+								className="form-select"
+								id="difficulty"
+								name="difficulty"
+								value={formData.difficulty}
+								onChange={handleChange}
+							>
+								<option value="0">Any</option>
+								<option value="easy">Easy</option>
+								<option value="medium">Medium</option>
+								<option value="hard">Hard</option>
+							</select>
 						</div>
 						<div>
 							<label htmlFor="select-category">
@@ -188,23 +224,6 @@ export default function App() {
 								<option value="32">Entertainment: Cartoon &amp; Animations</option>
 							</select>
 						</div>
-						<div>
-							<label htmlFor="difficulty">
-								<b>Select Difficulty</b>
-							</label>
-							<select
-								className="form-select"
-								id="difficulty"
-								name="difficulty"
-								value={formData.difficulty}
-								onChange={handleChange}
-							>
-								<option value="0">Any</option>
-								<option value="easy">Easy</option>
-								<option value="medium">Medium</option>
-								<option value="hard">Hard</option>
-							</select>
-						</div>
 						<button onClick={startSession}>Start Quiz</button>
 					</form>
 				</div>
@@ -231,21 +250,15 @@ export default function App() {
 	let mainScreen = () => {
 		return (
 			<div id="main-screen">
-				<h1>Quizzical</h1>
+				<header>
+					<h1>Quizzical</h1>
+					<button onClick={reset}>
+						<span className="material-symbols-outlined">arrow_back</span>
+					</button>
+				</header>
 				<div id="quizzes">{quizElements}</div>
 				<div id="bottom-row">
-					{submitted && (
-						<p className="result">
-							{correctCount / formData.numberOfQuestions <= 0.4 &&
-								`You only got ${correctCount}/${formData.numberOfQuestions} questions 😵. Better luck next time?`}
-							{correctCount > 0 &&
-								correctCount < formData.numberOfQuestions &&
-								correctCount / formData.numberOfQuestions > 0.4 &&
-								`You got ${correctCount}/${formData.numberOfQuestions} questions right! Good job! 🎉`}
-							{correctCount == formData.numberOfQuestions &&
-								`✨Perfect✨ score! You should up the stakes!`}
-						</p>
-					)}
+					{submitted && <p className="result-text">{resultText} </p>}
 					<button onClick={submitted ? reset : checkAnswers}>
 						{submitted ? "Replay" : "Check answers"}
 					</button>
