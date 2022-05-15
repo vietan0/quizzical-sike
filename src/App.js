@@ -251,10 +251,10 @@ export default function App() {
 		return (
 			<div id="main-screen">
 				<header>
-					<h1>Quizzical</h1>
 					<button onClick={reset}>
 						<span className="material-symbols-outlined">arrow_back</span>
 					</button>
+					<h1>Quizzical</h1>
 				</header>
 				<div id="quizzes">{quizElements}</div>
 				<div id="bottom-row">

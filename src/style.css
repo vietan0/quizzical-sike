@@ -148,7 +148,7 @@ button:hover {
   text-align: right;
 }
 #main-screen .quiz h2 {
-  font-size: min(1rem + 0.9vw, 22px);
+  font-size: min(1rem + 0.9vw, 18px);
   font-weight: 700;
   margin-bottom: 16px;
 }
@@ -163,7 +163,7 @@ button:hover {
   outline: 1px solid hsl(230deg, 34%, 46%);
   border-radius: 64px;
   text-align: center;
-  min-width: max-content;
+  min-width: fit-content;
   cursor: pointer;
   user-select: none;
   transition: all 0.1s ease-out;
@@ -220,6 +220,17 @@ button:hover {
 }
 
 @media (max-width: 450px) {
+  #main-screen {
+    margin-left: max(12px, 8vw);
+    margin-right: max(12px, 8vw);
+    /* 
+    	.index {
+    		position: absolute;
+    		left: -$d8;
+    		width: $d7;
+    		text-align: right;
+    } */
+  }
   #main-screen header {
     display: flex;
     align-items: center;
@@ -231,7 +242,21 @@ button:hover {
   #main-screen header button {
     position: static;
     margin-top: 0;
-    order: -1;
+  }
+  #main-screen .quiz .index {
+    position: static;
+    width: initial;
+    text-align: initial;
+    margin-bottom: 4px;
+  }
+  #main-screen .quiz .choices {
+    flex-direction: column;
+  }
+  #main-screen .quiz .choices div {
+    min-width: none;
+  }
+  #main-screen #bottom-row .result-text {
+    text-align: center;
   }
 }
 @media (min-width: 780px) {

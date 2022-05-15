@@ -192,7 +192,7 @@ button {
 		}
 
 		h2 {
-			font-size: min(calc(1rem + 0.9vw), 22px);
+			font-size: min(calc(1rem + 0.9vw), 18px);
 			font-weight: 700;
 			margin-bottom: $d4;
 		}
@@ -208,7 +208,7 @@ button {
 				outline: 1px solid $blue-secondary;
 				border-radius: $d9;
 				text-align: center;
-				min-width: max-content;
+				min-width: fit-content;
 				cursor: pointer;
 				user-select: none;
 				transition: all 0.1s ease-out;
@@ -274,19 +274,52 @@ button {
 }
 
 @media (max-width: 450px) {
-	#main-screen header {
-		display: flex;
-		align-items: center;
-		gap: $d4;
+	#main-screen {
+		margin-left: max($d3, 8vw);
+		margin-right: max($d3, 8vw);
 
-		h1 {
-			margin-bottom: 0;
+		header {
+			display: flex;
+			align-items: center;
+			gap: $d4;
+
+			h1 {
+				margin-bottom: 0;
+			}
+
+			button {
+				position: static;
+				margin-top: 0;
+			}
 		}
 
-		button {
-			position: static;
-			margin-top: 0;
-			order: -1;
+		/* 
+			.index {
+				position: absolute;
+				left: -$d8;
+				width: $d7;
+				text-align: right;
+		} */
+
+		.quiz {
+			.index {
+				position: static;
+				width: initial;
+				text-align: initial;
+				margin-bottom: $d1;
+			}
+
+			.choices {
+				flex-direction: column;
+
+				div {
+					min-width: none;
+				}
+			}
+		}
+
+		#bottom-row .result-text {
+			text-align: center;
 		}
 	}
 }
